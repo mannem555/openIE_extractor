@@ -6,19 +6,17 @@ import allennlp_models.structured_prediction
 
 def extract_helper(desc):
   data=desc.split("] ")
-  #print(data)
-  #arg_list=[]
   arg_list={}
   for word in data:
       if word.find("[ARG")!=-1:
           temp=word.split(":")
-          #arg_list.append(temp[1].strip())
+    
           temp2=temp[0].split("[")
           arg=temp2[1]
           arg_list[arg]=temp[1].strip()
       elif word.find("[V:")!=-1:
           temp=word.split(":")
-          #arg_list.append(temp[1].strip())
+         
           arg_list["relation"]=temp[1].strip()
           
   return arg_list
@@ -32,10 +30,10 @@ def extract_triplets(sentence):
   prediction=predictor.predict(
     sentence=sentence
   )
-  #print(prediction)
+  
   triplets=[]
   for triplet in prediction['verbs']:
-    #print(triplet['verb'])
+   
     print(triplet["description"])
     print("*"*50)
     desc=triplet["description"]
